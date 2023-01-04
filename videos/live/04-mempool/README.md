@@ -1,4 +1,4 @@
-# ChainDev LIVE - Ecouter la Mempool de la C-Chain Avalanche
+# ChainDev LIVE - Mempool avec la C-Chain Avalanche
 
 ## Initialisation du projet Go 
 

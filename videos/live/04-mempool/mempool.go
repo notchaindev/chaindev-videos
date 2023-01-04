@@ -59,9 +59,9 @@ func Mempool(client ethclient.Client) {
 
 	tjRouterABI, err := tjRouterMetada.GetAbi()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("⛔️ Can't retrieve the ABI: %v", err)
 	}
-	// log.Debugf("TraderJoe Router ABI: %+v", tjRouterABI)
+	log.Debugf("TraderJoe Router ABI: %+v", tjRouterABI)
 
 	// TraderJoe router
 	tjRouter := common.HexToAddress("0x60aE616a2155Ee3d9A68541Ba4544862310933d4")
@@ -96,7 +96,7 @@ func Mempool(client ethclient.Client) {
 
 					method, err := tjRouterABI.MethodById(methodSigData)
 					if err != nil {
-						log.Fatalf("Can't retrieve the method name", err)
+						log.Fatalf("⛔️ Can't retrieve the method name", err)
 					}
 					log.Infof("Method name: %s", method.Name)
 
@@ -104,13 +104,10 @@ func Mempool(client ethclient.Client) {
 					inputsMap := make(map[string]interface{})
 					err = method.Inputs.UnpackIntoMap(inputsMap, paramsData)
 					if err != nil {
-						log.Fatalf("Can't retrieve input params: %v", err)
+						log.Fatalf("⛔️ Can't retrieve input params: %v", err)
 					}
 					log.Infof("Input params: %+v", inputsMap)
 				}
-				// if msg.From() == tjRouter {
-				// 	log.Infof("☑️ [TX from TJ] pending:%t - TxType:%d - From:%v - To:%v - TxValue:%d - Data:%v", pending, tx.Type(), msg.From(), msg.To(), msg.Value(), msg.Data())
-				// }
 			}
 		}
 	}
